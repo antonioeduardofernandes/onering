@@ -2,7 +2,7 @@
   <div id="app_header">
     <div class="info">
       <div class="endurance">
-        <div class="score">22/22</div>
+        <div class="score">{{ character.endurance.current }}/{{ character.endurance.max }}</div>
         <div class="endurance_icon">
           <img src="../assets/endurance.png" />
         </div>
@@ -11,38 +11,60 @@
         <div class="fatigue_icon">
           <img src="../assets/bolt.png" />
         </div>
-        <div class="fatigue_score">12</div>
+        <div class="fatigue_score">{{ character.fatigue }}</div>
       </div>
     </div>
     <div class="center">
-      <div class="title">Alantariel</div>
-      <div class="subtitle">altos elfos de valfenda</div>
-      <div class="subtitle">andarilho</div>
+      <div class="title">{{ character.name }}</div>
+      <div class="subtitle">{{ character.culture }}</div>
+      <div class="subtitle">{{ character.calling }}</div>
       <div class="lock">
-        <img src="../assets/lock.png" />
+        <img src="../assets/lock.png" @click="lockScreen" />
       </div>
+      <teleport to="body">
+        <div class="screen_blocker" v-if="locked" />
+      </teleport>
     </div>
     <div class="info">
       <div class="hope">
-        <div class="hope_score">08/08</div>
+        <div class="hope_score">{{ character.hope.current }}/{{ character.hope.max }}</div>
         <div class="hope_icon">
           <img src="../assets/hope.png" />
         </div>
+        <div class="fellowship_score">{{ character.fellowship.current }}</div>
       </div>
       <div class="shadow">
         <div class="shadow_icon">
           <img src="../assets/shadow.png" />
         </div>
-        <div class="shadow_score">12</div>
+        <div class="shadow_score">{{ character.shadow.current }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { gsap } from "gsap"
+import { computed, ref } from "vue"
+import { useStore } from "vuex"
 export default {
   setup() {
-    return {}
+    const store = useStore()
+    const character = computed(() => store.state.character)
+    const locked = ref(false)
+    const lockScreen = () => {
+      if (!locked.value) {
+        gsap.to(".lock", { duration: 0.2, opacity: 1 })
+        return (locked.value = !locked.value)
+      }
+      gsap.to(".lock", { duration: 0.2, opacity: 0.2 })
+      return (locked.value = !locked.value)
+    }
+    return {
+      character,
+      locked,
+      lockScreen,
+    }
   },
 }
 </script>
@@ -74,12 +96,24 @@ export default {
   align-items: center;
   justify-content: center;
   opacity: 0.2;
+  z-index: 1000;
 }
 
 .lock img {
   --size: 2rem;
   width: var(--size);
   height: var(--size);
+}
+
+.screen_blocker {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 998;
+  background-color: var(--bg);
+  opacity: 0.8;
 }
 
 .title {
@@ -91,9 +125,10 @@ export default {
 }
 
 .info {
+  font-weight: bold;
   display: flex;
   flex-flow: column;
-  row-gap: 0.4rem;
+  row-gap: 0.6rem;
 }
 
 .endurance,
@@ -135,8 +170,9 @@ export default {
 }
 
 .fatigue_score,
-.shadow_score {
-  --size: 1.8rem;
+.shadow_score,
+.fellowship_score {
+  --size: 1.6rem;
   width: var(--size);
   height: var(--size);
   display: flex;
@@ -157,6 +193,11 @@ export default {
 
 .hope_icon {
   border-color: var(--white);
+}
+
+.fellowship_score {
+  bottom: -.6rem;
+
 }
 
 .shadow {
