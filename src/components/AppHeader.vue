@@ -22,7 +22,7 @@
         <img src="../assets/lock.png" @click="lockScreen" />
       </div>
       <teleport to="body">
-        <div class="screen_blocker" v-if="locked" />
+        <div class="screen_blocker" />
       </teleport>
     </div>
     <div class="info">
@@ -51,15 +51,19 @@ export default {
   setup() {
     const store = useStore()
     const character = computed(() => store.state.character)
+    
     const locked = ref(false)
     const lockScreen = () => {
       if (!locked.value) {
         gsap.to(".lock", { duration: 0.2, opacity: 1 })
+        gsap.to(".screen_blocker", { duration: 0.2, opacity: 0.8, pointerEvents: "all" })
         return (locked.value = !locked.value)
       }
       gsap.to(".lock", { duration: 0.2, opacity: 0.2 })
+      gsap.to(".screen_blocker", { duration: 0.2, opacity: 0, pointerEvents: "none" })
       return (locked.value = !locked.value)
     }
+    
     return {
       character,
       locked,
@@ -113,7 +117,8 @@ export default {
   left: 0;
   z-index: 998;
   background-color: var(--bg);
-  opacity: 0.8;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .title {

@@ -3,7 +3,9 @@
     <div class="main">
       <img class="background_image" src="./assets/background.png" />
       <app-header />
-      <component :is="component" />
+      <div class="content">
+        <component :is="component" />
+      </div>
     </div>
     <bottom-nav />
   </div>
@@ -77,5 +79,10 @@ body {
   width: 100%;
   top: -10px;
   opacity: 0.1;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
 }
 </style>
