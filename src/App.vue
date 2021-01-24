@@ -1,7 +1,10 @@
 <template>
   <div id="app">
-    <app-header />
-    <component :is="component" />
+    <div class="main">
+      <img class="background_image" src="./assets/background.png" />
+      <app-header />
+      <component :is="component" />
+    </div>
     <bottom-nav />
   </div>
 </template>
@@ -60,5 +63,19 @@ body {
   background: var(--bg);
   overflow: hidden;
   display: grid;
+}
+
+.main {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.background_image {
+  position: absolute;
+  width: 100%;
+  top: -10px;
+  opacity: 0.1;
 }
 </style>

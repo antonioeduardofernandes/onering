@@ -196,8 +196,7 @@ export default {
 }
 
 .fellowship_score {
-  bottom: -.6rem;
-
+  bottom: -0.6rem;
 }
 
 .shadow {
