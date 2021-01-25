@@ -64,7 +64,7 @@ html,
   padding: 0;
   box-sizing: border-box;
   user-select: none;
-  font-size: 2.2vh;
+  font-size: 2vh;
 }
 
 body {

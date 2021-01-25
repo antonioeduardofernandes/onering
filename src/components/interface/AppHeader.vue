@@ -86,11 +86,11 @@ export default {
   flex-flow: column;
   align-items: center;
   text-transform: capitalize;
-  margin-top: 0.6rem;
+  /* margin-top: 0.6rem; */
 }
 
 .lock {
-  --size: 2.6rem;
+  --size: 2.4rem;
   margin-top: 1rem;
   width: var(--size);
   height: var(--size);
@@ -122,11 +122,11 @@ export default {
 }
 
 .title {
-  font-size: 1.4rem;
+  font-size: 2rem;
 }
 
 .subtitle {
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
 .info {
@@ -158,7 +158,6 @@ export default {
 
 .fatigue,
 .shadow {
-  align-self: flex-end;
   position: relative;
 }
 
@@ -177,6 +176,7 @@ export default {
 .fatigue_score,
 .shadow_score,
 .fellowship_score {
+  position: absolute;
   --size: 1.6rem;
   width: var(--size);
   height: var(--size);
@@ -187,10 +187,41 @@ export default {
   background-color: var(--bg);
   border: 0.1rem solid var(--white);
   font-size: 0.9rem;
-  position: absolute;
-  right: -10px;
-  bottom: -16px;
 }
+
+.fellowship_score {
+  --size: 2rem;
+  width: var(--size);
+  height: var(--size);
+  border: 0.2rem solid var(--white);
+  right: -4px;
+  bottom: -1rem;
+}
+
+.fatigue_icon {
+  margin-left: 2rem;
+}
+
+.fatigue_score {
+  right: -10px;
+  bottom: -10px;
+}
+
+.shadow {
+  align-self: flex-start;
+}
+
+.shadow_icon {
+  border-color: var(--red);
+  margin-right: 2rem;
+}
+
+.shadow_score {
+  left: -10px;
+  bottom: -10px;
+}
+
+
 
 .hope {
   position: relative;
@@ -200,19 +231,4 @@ export default {
   border-color: var(--white);
 }
 
-.fellowship_score {
-  bottom: -0.6rem;
-}
-
-.shadow {
-  align-self: flex-start;
-}
-
-.shadow_icon {
-  border-color: var(--red);
-}
-
-.shadow_score {
-  left: -10px;
-}
 </style>
