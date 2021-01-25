@@ -1,30 +1,44 @@
 <template>
   <div id="app">
+    <app-header />
+    <img class="background_image" src="./assets/background.png" />
     <div class="main">
-      <img class="background_image" src="./assets/background.png" />
-      <app-header />
       <div class="content">
-        <component :is="component" />
+        <keep-alive>
+          <component :is="component" />
+        </keep-alive>
       </div>
     </div>
-    <bottom-nav />
+    <bottom-nav @navigateTo="navigateTo($event)" />
   </div>
 </template>
 
 <script>
 import { ref } from "vue"
-import AppHeader from "./components/AppHeader"
-import BottomNav from "./components/BottomNav"
-import Home from "./components/Home"
+import AppHeader from "./components/interface/AppHeader"
+import BottomNav from "./components/interface/BottomNav"
+import Home from "./pages/Home"
+import Skills from "./pages/Skills"
+import Combat from "./pages/Combat"
+import Inventory from "./pages/Inventory"
+import Journeys from "./pages/Journeys"
+import Campaign from "./pages/Campaign"
 export default {
   components: {
-    Home,
     BottomNav,
     AppHeader,
+    Home,
+    Skills,
+    Combat,
+    Inventory,
+    Journeys,
+    Campaign,
   },
   setup() {
     const component = ref("Home")
-    return { component }
+
+    const navigateTo = e => (component.value = e)
+    return { component, navigateTo }
   },
 }
 </script>
@@ -55,7 +69,7 @@ html,
 
 body {
   height: 100vh;
-  width: 100vw;
+  width: 100%;
 }
 
 #app {
@@ -63,19 +77,19 @@ body {
   width: 100%;
   color: var(--white);
   background: var(--bg);
+  display: flex;
+  flex-flow: column;
   overflow: hidden;
-  display: grid;
 }
 
 .main {
-  overflow: hidden;
   width: 100%;
   height: 100%;
-  position: relative;
+  overflow: hidden;
 }
 
 .background_image {
-  position: absolute;
+  position: fixed;
   width: 100%;
   top: -10px;
   opacity: 0.1;
@@ -84,5 +98,7 @@ body {
 .content {
   width: 100%;
   height: 100%;
+  margin-top: 2rem;
+  overflow: hidden;
 }
 </style>

@@ -4,12 +4,12 @@
       <div class="endurance">
         <div class="score">{{ character.endurance.current }}/{{ character.endurance.max }}</div>
         <div class="endurance_icon">
-          <img src="../assets/endurance.png" />
+          <img src="../../assets/endurance.png" />
         </div>
       </div>
       <div class="fatigue">
         <div class="fatigue_icon">
-          <img src="../assets/bolt.png" />
+          <img src="../../assets/bolt.png" />
         </div>
         <div class="fatigue_score">{{ character.fatigue }}</div>
       </div>
@@ -19,7 +19,7 @@
       <div class="subtitle">{{ character.culture }}</div>
       <div class="subtitle">{{ character.calling }}</div>
       <div class="lock">
-        <img src="../assets/lock.png" @click="lockScreen" />
+        <img src="../../assets/lock.png" @click="lockScreen" />
       </div>
       <teleport to="body">
         <div class="screen_blocker" />
@@ -29,13 +29,13 @@
       <div class="hope">
         <div class="hope_score">{{ character.hope.current }}/{{ character.hope.max }}</div>
         <div class="hope_icon">
-          <img src="../assets/hope.png" />
+          <img src="../../assets/hope.png" />
         </div>
         <div class="fellowship_score">{{ character.fellowship.current }}</div>
       </div>
       <div class="shadow">
         <div class="shadow_icon">
-          <img src="../assets/shadow.png" />
+          <img src="../../assets/shadow.png" />
         </div>
         <div class="shadow_score">{{ character.shadow.current }}</div>
       </div>
@@ -51,7 +51,7 @@ export default {
   setup() {
     const store = useStore()
     const character = computed(() => store.state.character)
-    
+
     const locked = ref(false)
     const lockScreen = () => {
       if (!locked.value) {
@@ -63,7 +63,7 @@ export default {
       gsap.to(".screen_blocker", { duration: 0.2, opacity: 0, pointerEvents: "none" })
       return (locked.value = !locked.value)
     }
-    
+
     return {
       character,
       locked,
