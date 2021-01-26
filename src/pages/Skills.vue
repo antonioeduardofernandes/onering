@@ -11,7 +11,11 @@ import { useStore } from "vuex"
 export default {
   setup() {
     const store = useStore()
-    const skills = store.state.character.skills
+    const skills = store.state.character.skills.sort((a, b) => {
+      if (a.name > b.name) return 1
+      if (a.name < b.name) return -1
+      return 0
+    })
     return { skills }
   },
 }
@@ -19,17 +23,16 @@ export default {
 
 <style scoped>
 #skills {
+  height: 100%;
   display: flex;
   flex-flow: column;
-  height: 100%;
-  overflow-y: hidden;
 }
 
 .skill_list {
   height: 100%;
+  overflow-y: scroll;
   display: flex;
   flex-flow: column;
   row-gap: 1rem;
-  overflow-y: scroll;
 }
 </style>

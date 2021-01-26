@@ -1,15 +1,13 @@
 <template>
   <div id="app">
+  <img class="background_image" src="./assets/background.png" />
     <app-header />
-    <img class="background_image" src="./assets/background.png" />
     <div class="main">
-      <div class="content">
-        <keep-alive>
-          <component :is="component" />
-        </keep-alive>
-      </div>
+      <keep-alive>
+        <component :is="component" />
+      </keep-alive>
+      <bottom-nav @navigateTo="navigateTo($event)" />
     </div>
-    <bottom-nav @navigateTo="navigateTo($event)" />
   </div>
 </template>
 
@@ -68,8 +66,9 @@ html,
 }
 
 body {
+  width: 100vw;
   height: 100vh;
-  width: 100%;
+  overflow: hidden;
 }
 
 #app {
@@ -79,13 +78,12 @@ body {
   background: var(--bg);
   display: flex;
   flex-flow: column;
-  overflow: hidden;
 }
 
-.main {
-  width: 100%;
-  height: 100%;
+#app .main {
+  margin-top: 2rem;
   overflow: hidden;
+  z-index: 2;
 }
 
 .background_image {
@@ -93,12 +91,5 @@ body {
   width: 100%;
   top: -10px;
   opacity: 0.1;
-}
-
-.content {
-  width: 100%;
-  height: 100%;
-  margin-top: 2rem;
-  overflow: hidden;
 }
 </style>
