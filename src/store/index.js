@@ -32,6 +32,7 @@ export default createStore({
       fellowship: { current: 4, max: 4 },
       hope: { current: 8, max: 8 },
       shadow: { current: 0, permanent: 0 },
+      advancementPoints:0,
     },
   },
   mutations: {},

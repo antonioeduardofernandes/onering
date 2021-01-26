@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-  <img class="background_image" src="./assets/background.png" />
+    <img class="background_image" src="./assets/background.png" />
     <app-header />
     <div class="main">
       <keep-alive>
@@ -51,6 +51,7 @@ export default {
   --green: #05947a;
   --white: #ffffff;
   --black: #000000;
+  --gray-dark: #424242;
   --glow: 1px 1px 7px rgba(255, 255, 255, 0.26);
 }
 
@@ -81,9 +82,10 @@ body {
 }
 
 #app .main {
-  margin-top: 2rem;
+  margin-top: 3rem;
   overflow: hidden;
   z-index: 2;
+  margin-bottom: 4rem;
 }
 
 .background_image {
