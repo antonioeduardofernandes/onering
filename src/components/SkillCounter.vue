@@ -15,14 +15,39 @@
       <div class="score" :class="{ score_checked: skill.score > 4 }" />
       <div class="score" :class="{ score_checked: skill.score > 5 }" />
     </div>
-    <div class="advancement"></div>
+    <div class="advancement">
+      <div class="advancement_counter" :class="{ advancement_checked: advancementScore > 0 }" />
+      <div class="advancement_counter" :class="{ advancement_checked: advancementScore > 1 }" />
+      <div class="advancement_counter" :class="{ advancement_checked: advancementScore > 2 }" />
+    </div>
   </div>
 </template>
 
 <script>
+import { computed, ref } from "vue"
+import { useStore } from "vuex"
 export default {
   props: {
     skill: Object,
+  },
+  setup(props) {
+    const store = useStore()
+
+    const skillGroups = ref([
+      { name: "personalidade", skills: ["assombro", "inspiração", "persuasão"] },
+      { name: "movimento", skills: ["atletismo", "viagem", "furtividade"] },
+      { name: "percepção", skills: ["atenção", "intuição", "investigação"] },
+      { name: "sobrevivência", skills: ["exploração", "cura", "caça"] },
+      { name: "costumes", skills: ["cantigas", "cortesia", "enigmas"] },
+      { name: "ocupação", skills: ["ofício", "batalha", "conhecimento"] },
+    ])
+
+    const advancementScore = computed(() => {
+      const group = skillGroups.value.find(group => group.skills.includes(props.skill.name))
+      return store.state.character.advancementPoints.find(g => g.name === group.name).score
+    })
+
+    return { skillGroups, advancementScore }
   },
 }
 </script>
@@ -30,12 +55,13 @@ export default {
 <style scoped>
 #skill_counter {
   display: grid;
-  grid-template-columns: 140px 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .title {
   display: flex;
   column-gap: 0.4rem;
+  text-transform: uppercase;
 }
 
 .star {
@@ -45,14 +71,10 @@ export default {
   fill: var(--gold);
 }
 
-.name {
-  text-transform: uppercase;
-}
-
 .score_container {
   display: flex;
   align-items: center;
-  column-gap: 0.6rem;
+  column-gap: 0.8rem;
 }
 
 .score {
@@ -66,5 +88,23 @@ export default {
 .score_checked {
   background-color: var(--green);
   border: 1px solid var(--white);
+}
+
+.advancement {
+  display: flex;
+  align-items: center;
+  justify-self: flex-end;
+}
+
+.advancement_counter {
+  width: 20px;
+  height: 10px;
+  background-color: var(--blue);
+  clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+  opacity: 0.15;
+}
+
+.advancement_checked {
+  opacity: 1;
 }
 </style>
