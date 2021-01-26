@@ -15,7 +15,7 @@
       <div class="score" :class="{ score_checked: skill.score > 4 }" />
       <div class="score" :class="{ score_checked: skill.score > 5 }" />
     </div>
-    <div class="advancement">
+    <div class="advancement" @click="increaseAdvancementPoints">
       <div class="advancement_counter" :class="{ advancement_checked: advancementScore > 0 }" />
       <div class="advancement_counter" :class="{ advancement_checked: advancementScore > 1 }" />
       <div class="advancement_counter" :class="{ advancement_checked: advancementScore > 2 }" />
@@ -47,7 +47,14 @@ export default {
       return store.state.character.advancementPoints.find(g => g.name === group.name).score
     })
 
-    return { skillGroups, advancementScore }
+    const increaseAdvancementPoints = () => {
+      const group = skillGroups.value.find(g => g.skills.includes(props.skill.name)).name
+      const advancementGroup = store.state.character.advancementPoints.find(g => g.name === group)
+      if (advancementGroup.score === 3) return (advancementGroup.score = 0)
+      return advancementGroup.score++
+    }
+
+    return { skillGroups, advancementScore, increaseAdvancementPoints }
   },
 }
 </script>
