@@ -42,7 +42,6 @@ export default {
   height: 100%;
   display: flex;
   flex-flow: column;
-  padding: 1rem;
   row-gap: 3rem;
 }
 

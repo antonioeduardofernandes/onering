@@ -1,19 +1,19 @@
 <template>
   <div id="app">
     <img class="background_image" src="./assets/background.png" />
-    <app-header />
+    <main-header />
     <div class="main">
       <keep-alive>
         <component :is="component" />
       </keep-alive>
-      <bottom-nav @navigateTo="navigateTo($event)" />
     </div>
+    <bottom-nav @navigateTo="navigateTo($event)" />
   </div>
 </template>
 
 <script>
 import { ref } from "vue"
-import AppHeader from "./components/interface/AppHeader"
+import MainHeader from "./components/interface/MainHeader"
 import BottomNav from "./components/interface/BottomNav"
 import Home from "./pages/Home"
 import Skills from "./pages/Skills"
@@ -24,7 +24,7 @@ import Campaign from "./pages/Campaign"
 export default {
   components: {
     BottomNav,
-    AppHeader,
+    MainHeader,
     Home,
     Skills,
     Combat,
@@ -82,10 +82,11 @@ body {
 }
 
 #app .main {
-  margin-top: 3rem;
+  margin-top: 1rem;
   overflow: hidden;
   z-index: 2;
   margin-bottom: 4rem;
+  padding: 1rem;
 }
 
 .background_image {

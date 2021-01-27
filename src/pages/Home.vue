@@ -23,8 +23,10 @@ export default {
 
 <style scoped>
 #home {
-  padding: 1rem;
+  display: flex;
+  flex-flow: column;
 }
+
 .traits .title {
   border-bottom: 1px solid rgba(100, 100, 100, 0.3);
   margin-bottom: 0.4rem;

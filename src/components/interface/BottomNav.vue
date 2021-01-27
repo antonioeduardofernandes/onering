@@ -5,7 +5,7 @@
       v-for="(link, index) in links"
       :key="index"
       @click="navigateTo(link.path)"
-      :src="require(`../../assets/${link.icon}.png`)"
+      :src="require(`../../assets/bottom_nav/${link.icon}.png`)"
     />
   </div>
 </template>

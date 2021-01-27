@@ -6,6 +6,8 @@ export default createStore({
       name: "alantariel",
       culture: "altos elfos de valfenda",
       calling: "andarilho",
+      living: "próspero",
+      treasure: 2,
       traits: ["exploração de túneis", "conhecimento das sombras", "comércio", "astuto", "justo"],
       skills: [
         { name: "assombro", score: 0 },
